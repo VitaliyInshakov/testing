@@ -1,8 +1,8 @@
-import { SAVE_COMMENT } from './types';
+import { CHANGE_AUTH } from './types';
 
-export function saveComment(comment) {
+export function authenticate(isLoggedIn) {
   return {
-    type: SAVE_COMMENT,
-    payload: comment
+    type: CHANGE_AUTH,
+    payload: isLoggedIn
   }
 }
