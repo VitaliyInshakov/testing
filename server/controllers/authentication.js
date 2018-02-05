@@ -8,7 +8,7 @@ function tokenForUser(user) {
 }
 
 exports.signin = function(req, res, next) {
-  res.send({ token: tokenForUser(user) });
+  res.send({ token: tokenForUser(req.user) });
 }
 
 exports.signup = function(req, res, next) {
@@ -19,10 +19,10 @@ exports.signup = function(req, res, next) {
     return res.status(422).send({ error: 'You must provide email and password' });
   }
 
-  User.findOne({ email: email }, (error, user) => {
+  User.findOne({ email: email }, (error, existingUser) => {
     if(error) return next(error);
 
-    if(user) {
+    if(existingUser) {
       return res.status(422).send({ error: 'Email is in use'});
     }
 
